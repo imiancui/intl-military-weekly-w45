@@ -80,6 +80,14 @@ body{background:var(--ink);color:var(--fg);font-family:var(--f-body);padding-lef
 .mk{position:absolute;transform:translate(-50%,-130%);font-size:1.05cqw;font-weight:700;white-space:nowrap;padding:.15cqw .5cqw;background:rgba(3,8,15,.78);border:1px solid currentColor;letter-spacing:.03em;transition:opacity .25s}
 .mk::after{content:"";position:absolute;left:50%;top:100%;width:1px;height:1.1cqw;background:currentColor}
 #src{right:2.2cqw;bottom:4.2cqw;font-size:.85cqw;color:var(--dim);font-family:var(--f-hud)}
+/* clickable source links (titles, map bubbles, panel bullets) */
+.lnk{pointer-events:auto;cursor:pointer}
+#lH.lnk::after,#src.lnk::after,#pB li.lnk::after{content:"↗";margin-left:.45em;font-size:.7em;color:var(--holo);opacity:.75;vertical-align:.15em}
+.mk.lnk::before{content:"↗";position:absolute;right:-.35cqw;top:-.95cqw;font-size:.7cqw;color:var(--holo)}
+#lH.lnk:hover,#src.lnk:hover,#pB li.lnk:hover{text-decoration:underline;text-underline-offset:.25em}
+.mk.lnk:hover{background:rgba(20,40,60,.95);box-shadow:0 0 .8cqw currentColor}
+#pB li.lnk:hover{background:rgba(12,28,44,.95)}
+.cap .lnk::before,.cap #lH.lnk::after,.cap #src.lnk::after,.cap #pB li.lnk::after{display:none}
 /* start */
 #start{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2cqw;background:rgba(0,0,0,.55);pointer-events:auto}
 #start button{font:700 1.8cqw var(--f-body);color:#001;background:var(--holo);border:0;padding:1cqw 2.6cqw;cursor:pointer;letter-spacing:.1em}
@@ -354,7 +362,7 @@ segs.forEach((s, si) => {
     const beam = new THREE.Mesh(beamGeo, new THREE.MeshBasicMaterial({ color: c, transparent: true, opacity: 0, blending: THREE.AdditiveBlending, depthWrite: false }));
     const n = ll(k.lat, k.lon, 1).normalize(); beam.position.copy(n); beam.quaternion.setFromUnitVectors(new V3(0, 1, 0), n); beam.scale.y = .001;
     globe.add(ping, beam);
-    const el = document.createElement('div'); el.className = 'mk'; el.textContent = k.label; el.style.color = CSSCOL[k.c || 'info']; el.style.opacity = 0; labelsEl.appendChild(el);
+    const el = document.createElement('div'); el.className = 'mk'; el.textContent = k.label; el.style.color = CSSCOL[k.c || 'info']; el.style.opacity = 0; if (k.u) { el.classList.add('lnk'); el.dataset.url = k.u; el.title = '開啟資料來源'; } labelsEl.appendChild(el);
     O.marks.push({ k, ping, beam, el, at: lineAt(s, k.at), top: n.clone().multiplyScalar(1 + (k.h || .09)) });
   });
   (s.arcs || []).forEach((a, ai) => {
@@ -480,9 +488,10 @@ let curSeg = -1;
 function buildPanel(s) {
   $('pK').textContent = s.kicker || ''; $('pN').textContent = s.chapter ? `SEC ${s.chapter}` : '';
   $('pS').innerHTML = (s.stats || []).map((x) => `<div class="st"><b>${x.v}</b><span>${x.l}</span></div>`).join('');
-  $('pB').innerHTML = (s.bullets || []).map((b) => `<li class="${b.c || ''}">${b.t}</li>`).join('');
+  $('pB').innerHTML = (s.bullets || []).map((b) => `<li class="${b.c || ''}${b.u ? ' lnk' : ''}"${b.u ? ` data-url="${b.u}" title="開啟資料來源"` : ''}>${b.t}</li>`).join('');
   $('lK').textContent = s.kicker || ''; $('lH').textContent = s.title || '';
   $('src').textContent = s.source ? '資料來源：' + s.source : '';
+  for (const el of [$('lH'), $('src')]) { el.classList.toggle('lnk', !!s.url); if (s.url) { el.dataset.url = s.url; el.title = '開啟資料來源'; } else { delete el.dataset.url; el.removeAttribute('title'); } }
   $('cNum').textContent = s.chapter || ''; $('cK').textContent = s.chapterEn || ''; $('cH').textContent = s.chapterTitle || '';
 }
 function setOp(el, v) { const s = v.toFixed(3); if (el._op !== s) { el.style.opacity = s; el._op = s; } }
@@ -669,6 +678,14 @@ tl.addEventListener('pointerleave', () => ($('hov').hidden = true));
 const endScrub = () => { if (!scrubbing) return; scrubbing = false; if (wasPlaying) syncAudio(); };
 tl.addEventListener('pointerup', endScrub); tl.addEventListener('pointercancel', endScrub);
 tl.addEventListener('keydown', (e) => { if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') { /* handled globally */ } });
+// click a visible title / bubble / bullet -> pause and open its source in a new tab
+stage.addEventListener('click', (e) => {
+  const el = e.target.closest('.lnk[data-url]'); if (!el) return;
+  let op = 1; for (let n = el; n && n !== stage; n = n.parentElement) op *= +getComputedStyle(n).opacity;
+  if (op < .4) return;
+  e.preventDefault(); if (playing) setPlaying(false);
+  window.open(el.dataset.url, '_blank', 'noopener');
+});
 $('bPlay').onclick = () => setPlaying(!playing);
 $('bBack').onclick = () => seek(T - 5); $('bFwd').onclick = () => seek(T + 5);
 $('bFrB').onclick = () => { setPlaying(false); seek(T - 1 / 30); }; $('bFrF').onclick = () => { setPlaying(false); seek(T + 1 / 30); };
