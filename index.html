@@ -112,6 +112,36 @@ table.watch td:first-child{font-family:var(--f-mono);white-space:nowrap;font-wei
 footer{border-top:1px solid var(--rule);margin-top:40px;padding-top:14px;font-size:12.5px;color:var(--ink2)}
 a:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
 @media (max-width:860px){.layout{grid-template-columns:minmax(0,1fr)}nav.toc{position:static}nav.toc ol{display:flex;flex-wrap:wrap;gap:4px 14px;border:0}nav.toc li a{padding:2px 0}header.cover{grid-template-columns:minmax(0,1fr)}.video{grid-template-columns:minmax(0,1fr)}}
+/* reading time + audio walkthrough */
+.ctl .rt{color:var(--signal);font-weight:600}
+.listen{margin:10px 0 6px;border:1px solid var(--rule);background:var(--sheet);padding:14px 16px}
+.listen .top{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.listen .pp{flex:none;width:46px;height:46px;border-radius:50%;border:0;background:var(--signal);color:var(--sheet);font-size:18px;cursor:pointer;display:grid;place-items:center}
+.listen .pp:hover,.listen .pp:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+.listen .lt{flex:1 1 240px;min-width:0}
+.listen .lt b{display:block;font-size:15px}
+.listen .lt span{font-size:13px;color:var(--ink2)}
+.listen .rates{display:flex;gap:4px}
+.listen .rates button,.listen .opt{font:12px var(--f-mono);border:1px solid var(--rule);background:transparent;color:var(--ink2);padding:4px 8px;cursor:pointer}
+.listen .rates button[aria-pressed="true"]{background:var(--ink);color:var(--sheet);border-color:var(--ink)}
+.listen .opt{display:flex;align-items:center;gap:6px}
+.listen .bar{display:flex;align-items:center;gap:10px;margin:12px 0 8px;font:12px var(--f-mono);color:var(--ink2)}
+.listen input[type=range]{flex:1;accent-color:var(--signal);min-width:0}
+.listen .chaps{display:flex;flex-wrap:wrap;gap:6px;margin:0;padding:0;list-style:none}
+.listen .chaps button{font:13px var(--f-body);border:1px solid var(--rule);background:transparent;color:var(--ink2);padding:4px 10px;cursor:pointer}
+.listen .chaps button .tm{font:11px var(--f-mono);opacity:.75}
+.listen .chaps button:hover{color:var(--ink);border-color:var(--ink2)}
+.listen .chaps button.on{background:var(--signal);border-color:var(--signal);color:var(--sheet)}
+.listen .cap{margin:12px 0 0;padding:10px 12px;border-left:3px solid var(--signal);background:var(--paper);font-size:15px;line-height:1.7;min-height:3.4em}
+.listen .cap:empty::before{content:"按下播放後，這裡會同步顯示導讀文字。";color:var(--ink2)}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:20;display:flex;align-items:center;gap:12px;padding:8px 16px calc(8px + env(safe-area-inset-bottom));background:var(--ink);color:var(--paper);font-size:13.5px;box-shadow:0 -4px 16px rgba(0,0,0,.25)}
+.dock[hidden]{display:none}
+.dock button{flex:none;width:34px;height:34px;border-radius:50%;border:0;background:var(--paper);color:var(--ink);cursor:pointer}
+.dock .dt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.dock .dt b{margin-right:8px;color:var(--warn)}
+.dock .tm{font:12px var(--f-mono);opacity:.8}
+.dock .prog{position:absolute;left:0;top:0;height:2px;background:var(--warn)}
+nav.toc li a.speaking{color:var(--signal);font-weight:600;border-left:2px solid var(--signal);margin-left:-2px}
 </style>
 
 <div class="band"><span>公開來源情報彙整 · OSINT · 可公開分享</span><span>WDIB-2026-W45</span></div>
@@ -123,9 +153,21 @@ a:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
       <p class="sub">荷莫茲再起火、能源戰入冬、臺灣選前雙軌施壓</p>
       <div class="meta"><p><strong>期間</strong>：2026年10月30日（五）至11月6日（五），含週末｜<strong>資料截止</strong>：11月6日｜<strong>性質</strong>：公開來源情報（OSINT）彙整</p><p><strong>標註說明</strong>：「未證實」＝來源衝突或僅見標題/摘要；「單一來源」＝僅一個來源且未獲佐證；「本週未能證實」＝本週查無可核實報導，不代表無事件發生。</p></div>
     </div>
-    <div class="ctl"><b>產品編號</b><span>WDIB-2026-W45</span><b>涵蓋期間</b><span>2026-10-30 至 11-06（含週末）</span><b>發布日期</b><span>2026-11-06</span><b>本文字數</b><span>約 4319 字（不含來源）</span></div>
+    <div class="ctl"><b>產品編號</b><span>WDIB-2026-W45</span><b>涵蓋期間</b><span>2026-10-30 至 11-06（含週末）</span><b>發布日期</b><span>2026-11-06</span><b>本文字數</b><span>約 4319 字（不含來源）</span><b>閱讀時間</b><span class="rt">約 13 分鐘｜語音導讀 12 分 55 秒</span></div>
   </header>
   <div class="video"><a href="video/index.html" target="_blank" rel="noopener">▶ 觀看 3D 動畫簡報</a><p>4 分 45 秒 WebGL 動畫版本：繁體中文字幕、台灣華語配音，可即時倒轉、慢放與逐格檢視。 <a href="W45_briefing.pptx" download>下載 PPT 簡報</a></p></div>
+  <section class="listen" id="listen" aria-label="語音導讀">
+    <div class="top">
+      <button class="pp" id="aPlay" aria-label="播放語音導讀">▶</button>
+      <div class="lt"><b>🎧 語音導讀：不看影片也能聽懂本週情勢</b><span>12 分 55 秒｜台灣華語配音，依「關鍵判斷 → 五大主題 → 下週觀察」順序導讀，可跳章節、調速。</span></div>
+      <div class="rates" role="group" aria-label="播放速度"><button data-r="1" aria-pressed="true">1×</button><button data-r="1.25" aria-pressed="false">1.25×</button><button data-r="1.5" aria-pressed="false">1.5×</button></div>
+      <label class="opt"><input type="checkbox" id="aFollow" checked> 跟隨捲動</label>
+    </div>
+    <div class="bar"><span id="aCur">0:00</span><input type="range" id="aSeek" min="0" max="1000" value="0" aria-label="導讀進度"><span id="aDur">12 分 55 秒</span></div>
+    <ol class="chaps" id="aChaps"></ol>
+    <p class="cap" id="aCap" aria-live="polite"></p>
+    <audio id="aud" src="narration.mp3" preload="metadata"></audio>
+  </section>
   <div class="layout">
     <nav class="toc" aria-label="目錄"><ol><li><a href="#sec-1">本週關鍵判斷</a></li><li><a href="#sec-2">一、各地區武裝衝突及佔領區勢力變化</a></li><li><a href="#sec-3">二、爭議區域衝突或官方聲明</a></li><li><a href="#sec-4">三、五常及重要國家／軍事同盟公開訊息</a></li><li><a href="#sec-5">四、各國新式軍武發表</a></li><li><a href="#sec-6">五、認知作戰及其他非武力戰場爭議</a></li><li><a href="#sec-7">下週觀察指標</a></li><li><a href="#sec-src">資料來源</a></li></ol></nav>
     <main><section id="sec-1" class="sec bluf"><h2>本週關鍵判斷</h2><ul><li><strong>荷莫茲海峽是本週動能最高的熱點，美伊戰事重啟風險高<span class="conf conf-m">信心 中</span></strong>。10/30–11/1多艘商船遭不明射彈或水雷攻擊，美軍11/2對格什姆島（Qeshm）實施「防禦性打擊」；同日伊朗提出解封條件，卡達斡旋仍在進行。</li><li><strong>俄羅斯以能源空襲換取冬季與談判籌碼<span class="conf conf-h">信心 高</span></strong>。三波主要空襲合計逾千架無人機，11/2–3為今年對能源最大規模攻擊；ISW評估俄軍10月連續第二個月淨失地。11/10–11阿布達比三方會談是下週關鍵節點。</li><li><strong>共機與認知作戰雙軌施壓臺灣九合一選舉<span class="conf conf-m">信心 中</span></strong>。11/1單日32架次、11/4聯合戰備警巡；賴清德11/4揭露境外門號帳號洗版與候選人官網流量攻擊，但官方尚未歸因。</li><li><strong>歐洲民生基礎設施同週遭三重混合威脅<span class="conf conf-m">信心 中</span></strong>。約11國超市冷藏系統網攻、16國航班炸彈恐嚇、北約東翼GNSS干擾同步出現，三者皆無官方歸因。</li><li><strong>黎巴嫩是美以若重啟對伊打擊時最可能連動的戰線<span class="conf conf-m">信心 中</span></strong>。以色列透過美方要求黎國軍隊在真主黨控制區設路障。</li><li><strong>AI自主化成為新式軍武主軸<span class="conf conf-h">信心 高</span></strong>。Shield AI X-BAT原型、Saab Gripen E AI代理人同週發表，中國宣稱GJ-21無人機上艦（未證實）。</li></ul></section><section id="sec-2" class="sec"><h2>一、各地區武裝衝突及佔領區勢力變化</h2><h3>烏俄：前線大致靜止，能源空襲加劇</h3><figure class="fig fig-map" id="fig-ukraine"><figcaption><b>圖 1　</b>烏俄戰場：控制區示意與本週主要打擊</figcaption><div class="scroll"><svg viewBox="0 0 760 560" role="img" aria-label="烏俄戰場：控制區示意與本週主要打擊" class="map"><defs><pattern id="hatch-ukraine" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="7" height="7" class="occ-bg"/><line x1="0" y1="0" x2="0" y2="7" class="occ-line"/></pattern>
@@ -148,11 +190,64 @@ a:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
   </div>
 </div>
 <div id="tip" hidden></div>
+<div class="dock" id="dock" hidden><div class="prog" id="dProg"></div><button id="dPlay" aria-label="暫停語音導讀">❚❚</button><div class="dt" id="dTxt"></div><span class="tm" id="dTm"></span></div>
 <script>
 (() => {
   const tip = document.getElementById('tip');
   const show = (el, x, y) => { tip.textContent = el.dataset.tip; tip.hidden = false; tip.style.left = x + 'px'; tip.style.top = y + 'px'; };
   document.addEventListener('pointermove', (e) => { const el = e.target.closest('[data-tip]'); if (el) show(el, e.clientX, e.clientY); else tip.hidden = true; });
   document.addEventListener('pointerleave', () => (tip.hidden = true));
+})();
+</script>
+<script>
+(() => {
+  const N = {"voice":"zh-TW-HsiaoChenNeural","duration":775.09,"chapters":[{"id":"c0","title":"開場","anchor":"top","t":0.6},{"id":"c1","title":"本週關鍵判斷","anchor":"sec-1","t":42.29},{"id":"c2","title":"一、武裝衝突與控制區","anchor":"sec-2","t":142.34},{"id":"c3","title":"二、爭議區域","anchor":"sec-3","t":314.44},{"id":"c4","title":"三、強權與同盟","anchor":"sec-4","t":445.8},{"id":"c5","title":"四、新式軍武","anchor":"sec-5","t":556.29},{"id":"c6","title":"五、認知作戰與非武力衝突","anchor":"sec-6","t":632.77},{"id":"c7","title":"下週觀察指標","anchor":"sec-7","t":720.97}],"cues":[{"t0":0.6,"t1":12.92,"ch":"c0","text":"這裡是國際軍事情勢週報，語音導讀版。本期涵蓋二〇二六年十月三十日星期五，到十一月六日星期五，包含週末，資料截止於十一月六日。"},{"t0":13.37,"t1":29.9,"ch":"c0","text":"內容全部來自公開來源。聽到「未證實」，代表來源互相衝突或只看到標題；「單一來源」，代表只有一個來源、沒有其他佐證；「本週未能證實」，代表這週查不到可以核實的報導，不等於沒有事情發生。"},{"t0":30.35,"t1":41.19,"ch":"c0","text":"整份導讀分成七個部分：本週關鍵判斷、武裝衝突、爭議區域、強權與同盟、新式軍武、認知作戰，最後是下週觀察指標。"},{"t0":42.29,"t1":45.3,"ch":"c1","text":"先講結論，本週有六個關鍵判斷。"},{"t0":45.75,"t1":69.09,"ch":"c1","text":"第一，荷莫茲海峽是本週動能最高的熱點，美國與伊朗重啟戰事的風險高，信心程度中等。十月三十日到十一月一日，多艘商船遭到不明射彈或水雷攻擊；十一月二日，美軍對伊朗格什姆島實施「防禦性打擊」。同一天，伊朗提出重開海峽的條件，卡達的斡旋仍在進行。"},{"t0":69.54,"t1":90.2,"ch":"c1","text":"第二，俄羅斯正以能源空襲，換取冬季與談判的籌碼，信心程度高。三波主要空襲合計超過一千架無人機，其中十一月二日到三日，是今年對烏克蘭能源最大規模的攻擊。下週十一月十日、十一日的阿布達比三方會談，是關鍵節點。"},{"t0":90.65,"t1":110.67,"ch":"c1","text":"第三，共機活動與認知作戰，正雙軌施壓台灣九合一選舉，信心程度中等。十一月一日單日共機三十二架次，十一月四日又有聯合戰備警巡；賴清德總統同一天揭露境外帳號洗版，以及候選人官網遭流量攻擊，但官方尚未正式歸因。"},{"t0":111.12,"t1":127.21,"ch":"c1","text":"第四，歐洲民生基礎設施同一週遭到三重混合威脅：約十一國的超市冷藏系統遭網攻、十六國航班接到炸彈恐嚇、北約東翼出現衛星定位干擾。三件事都還沒有官方歸因，信心程度中等。"},{"t0":127.66,"t1":135.12,"ch":"c1","text":"第五，如果美國和以色列重啟對伊朗的打擊，黎巴嫩是最可能被牽動的戰線，信心程度中等。"},{"t0":135.57,"t1":141.24,"ch":"c1","text":"第六，人工智慧自主化，已經成為新式軍武的主軸，信心程度高。"},{"t0":142.34,"t1":147.74,"ch":"c2","text":"第一部分，各地區武裝衝突與控制區變化。先看烏克蘭。"},{"t0":148.19,"t1":169.52,"ch":"c2","text":"地面戰線大致靜止。美國戰爭研究所評估，俄軍十月連續第二個月淨失去土地，而且是開戰以來單月最大的損失。俄軍滲透康斯坦丁尼夫卡已經超過一年，仍然沒有拿下；十一月三日雙方都沒有推進，十一月五日，烏軍在札波羅熱州西部有所推進。"},{"t0":169.97,"t1":197.77,"ch":"c2","text":"真正的重點在空中。十月三十一日到十一月一日，俄軍出動四百三十三架無人機；十一月二日到三日，再出動兩百八十九架無人機，加上七十六枚彈道與巡弋飛彈，攻擊九個州的發電與變電設施，連供電給赫梅利尼茨基核電廠的變電站也受損。十一月三日到四日，又來了三百一十架無人機，烏方擊落或干擾其中兩百七十二架。"},{"t0":198.22,"t1":215.73,"ch":"c2","text":"值得注意的是，俄軍十月發射的六千多架 Shahed 型無人機裡，有兩千六百多架是噴射型，這是烏克蘭防空目前最大的缺口。烏軍則用長程無人機，回擊俄羅斯雅羅斯拉夫、梁贊、奧廖爾等州的油料與後勤設施。"},{"t0":216.18,"t1":223.03,"ch":"c2","text":"研判：俄軍地面攻勢的效益正在遞減，所以改在入冬前打擊電網，在談判前施壓。"},{"t0":223.48,"t1":238.53,"ch":"c2","text":"接著看中東。加薩的停火已經名存實亡：十一月一日以軍空襲至少八人死亡，二日再有四人死亡。加薩衛生部統計，去年十月停火以來，已有一千五百九十三人喪生。"},{"t0":238.98,"t1":252.47,"ch":"c2","text":"黎巴嫩方面，以色列透過美方，要求黎巴嫩軍隊進駐真主黨地區設路障，防止真主黨加入可能重啟的伊朗戰事；以軍仍控制黎巴嫩南部緩衝區，真主黨拒絕解除武裝。"},{"t0":252.92,"t1":278.51,"ch":"c2","text":"美伊之間，美國持續封鎖伊朗港口，伊朗則認為美方的停火提案不足，另外透過卡達提出新的核方案。目前的斡旋方向，是用伊朗停止攻擊海峽，交換美方解除封鎖。研判：停火崩解、封鎖持續、打擊選項公開化，三件事同時存在，未來幾週重啟空襲的風險高，卡達是目前唯一的降溫管道。"},{"t0":278.96,"t1":299.65,"ch":"c2","text":"非洲方面，蘇丹的無人機戰正在區域化。十一月三日，疑似快速支援部隊的無人機襲擊南科爾多凡一處加油站，至少七死三十六傷。蘇丹指控衣索比亞提供無人機發射場，衣索比亞隨即驅逐六名蘇丹外交官。短期內看不到停火條件。"},{"t0":300.1,"t1":313.34,"ch":"c2","text":"最後，緬甸軍政府在克倫邦、孟邦與實皆省加強空襲與地面攻勢，約三千人流離失所。薩赫勒、剛果東部、海地等地，本週未能證實新的戰況。"},{"t0":314.44,"t1":319.86,"ch":"c3","text":"第二部分，爭議區域。荷莫茲海峽是本週最危險的地方。"},{"t0":320.31,"t1":337.32,"ch":"c3","text":"十月三十日，一艘卡達液化天然氣船遭不明物體擊中，拉萬島南方也有一艘船中彈起火；伊朗革命衛隊宣稱攔截四艘油輪，這一點未證實。十一月一日，一艘拖船中彈後部分下沉，屬於單一來源。"},{"t0":337.77,"t1":357.49,"ch":"c3","text":"十一月二日，伊朗革命衛隊對美軍飛機開火，美軍隨即在格什姆島與倫格港附近，打擊防空飛彈陣地。同一天，伊朗表示只要美方解除制裁、解凍資產，兩天內就能重開海峽，並暗示如果再遭攻擊，將退出禁止核子擴散條約。"},{"t0":357.94,"t1":367.16,"ch":"c3","text":"研判：攻擊範圍已經從海峽擴大到波斯灣中部與北部；伊朗的意圖很清楚，就是用航運安全，換取解除制裁。"},{"t0":367.61,"t1":392.41,"ch":"c3","text":"南海方面，十月三十日，共軍南部戰區宣布在黃岩島「領海領空」實施戰備警巡，中國海警同步巡查。菲律賓海警正在調查潟湖裡一艘身分不明的中國船隻，船上有附感測器與天線的橘色艇型物體，可能用於水下作業。研判：這符合北京鞏固黃岩島行政控制的跡象，但屬於推論。"},{"t0":392.86,"t1":419.28,"ch":"c3","text":"台海方面，國防部公布，十一月一日共機三十二架次，其中二十六架次逾越中線，另有共艦七艘；二日共機十九架次，四日二十二架次。十一月四日上午，還偵獲十四架次的聯合戰備警巡，據報導是五天內第二次。本週沒有具名的大型演習，但架次高峰和選舉期重疊，屬於低於衝突門檻的政治施壓。"},{"t0":419.73,"t1":436.23,"ch":"c3","text":"朝鮮半島，北韓一週兩度試射：十一月二日試射搭載「散布彈頭」的戰略巡弋飛彈；四日從順德一帶向東海發射數枚飛彈，北韓官媒稱是新型防空飛彈。研判屬於技術驗證，沒有危機升級的訊號。"},{"t0":436.68,"t1":444.7,"ch":"c3","text":"至於北極、格陵蘭、印巴控制線、中印邊境與波羅的海海纜，本週都未能證實有新的重大事件。"},{"t0":445.8,"t1":449.31,"ch":"c4","text":"第三部分，五常與重要國家、軍事同盟。"},{"t0":449.76,"t1":477.19,"ch":"c4","text":"美國：十一月三日期中選舉，民主黨贏得國會。國防部長赫格塞斯五日發布影片，為伊朗戰爭辯護，要求通過戰爭撥款，但撥款金額說法不一，未能釐清。軍售方面，國務院核准對烏克蘭出售二十一億美元的愛國者三型增強型飛彈，經費由加拿大、德國、挪威與歐盟支付；另外核准對約旦一億美元的精準導引火箭。"},{"t0":477.64,"t1":487.08,"ch":"c4","text":"中國：本週沒有舉行國防部例行記者會。上一次記者會在十月二十九日，要求美方停止與台灣的軍事接觸。"},{"t0":487.53,"t1":497.04,"ch":"c4","text":"俄羅斯：最近一次戰略動作，是十月二十八日從潛艦試射布拉瓦飛彈，早於本週；本週沒有官方的核武或動員聲明。"},{"t0":497.49,"t1":510.74,"ch":"c4","text":"英國與法國：英國宣布「Koalicja」演習，十一月九日到二十二日在波蘭舉行，是歐洲「意願聯盟」烏克蘭多國部隊的第一次大型演練，十一國、約兩千八百人參加。"},{"t0":511.19,"t1":518.83,"ch":"c4","text":"北約：十一月五日啟動反無人機採購平台，並開放一點三八億歐元的彈道飛彈防禦指揮系統採購。"},{"t0":519.28,"t1":533.43,"ch":"c4","text":"台灣：六千零七十六億元的追加預算，其中國防一千四百五十七億元，十一月三日付委；明年度國防部預算六千九百一十九億元，四日起審查，「強弓」飛彈移入公務預算。"},{"t0":533.88,"t1":541.65,"ch":"c4","text":"印太方面，美印日澳「馬拉巴爾二〇二六」演習，十一月五日到十二日在日本關東以南海域舉行。"},{"t0":542.1,"t1":555.19,"ch":"c4","text":"研判：國會易手後，伊朗戰費與明年度國防預算，成為美國最大的政策變數；歐洲藉這次演習預演停火後駐軍，但俄方反對外國部隊進駐，實際部署仍不確定。"},{"t0":556.29,"t1":562.66,"ch":"c5","text":"第四部分，各國新式軍武。本週最明顯的趨勢，是人工智慧自主化。"},{"t0":563.11,"t1":577.34,"ch":"c5","text":"美國 Shield AI 在十一月四日公開 X-BAT 垂直起降戰鬥無人機的全尺寸原型，採用向量推力發動機，還沒有試飛，目標二〇二九年量產，預計競逐美國空軍協同作戰無人機的下一階段。"},{"t0":577.79,"t1":585.7,"ch":"c5","text":"瑞典紳寶十一月三日宣布，自研的 AI 代理人已經在獅鷲 E 型戰機上試飛，主要用於超視距空戰。"},{"t0":586.15,"t1":595.66,"ch":"c5","text":"中國官方帳號宣稱，攻擊二十一匿蹤無人機已在零七六型「四川」艦完成起降，但沒有公布影像，屬於未證實。"},{"t0":596.11,"t1":607.48,"ch":"c5","text":"海軍方面，南韓「徐熙」號潛艦下水，約三千六百噸，採用國產鋰電池；法國在歐洲海軍展推出加長型 FDI 巡防艦，約五千四百噸。"},{"t0":607.93,"t1":623.27,"ch":"c5","text":"飛彈與反無人機方面，歐洲新創公司 Hypersonica 完成一億歐元募資，宣稱原型速度超過六馬赫；美國 Anduril 與 ORIGIN 在拉脫維亞展示反無人機系統，俄羅斯也發表 AI 反無人機網路與反無人機彈藥。"},{"t0":623.72,"t1":631.67,"ch":"c5","text":"研判：AI 自主與低成本量產是產業主軸，反制噴射無人機，是歐美目前最急迫的採購缺口。"},{"t0":632.77,"t1":635.8,"ch":"c6","text":"第五部分，認知作戰與非武力戰場。"},{"t0":636.25,"t1":659.47,"ch":"c6","text":"台灣選舉：賴清德總統十一月四日指出，大量以境外門號註冊、但定位在台灣的帳號集中洗版，操作普發現金、高齡健保費等議題；台北、高雄、新竹的候選人官網也遭到流量攻擊。國安局先前的報告指出，今年前九個月爭議訊息約兩百五十萬則，比去年增加約四成八。"},{"t0":659.92,"t1":667.04,"ch":"c6","text":"美國期中選舉：研究機構 Graphika 揭露，中國的「垃圾偽裝」網路把舊帳號改扮成美國選民。"},{"t0":667.49,"t1":681.95,"ch":"c6","text":"網路攻擊：十一月二日起，約十一個歐洲國家、上百家超市的冷藏控制器遭入侵，業界懷疑與俄羅斯有關，德國聯邦檢察官已經立案；資安公司也揭露了伏特颱風的新攻擊框架。"},{"t0":682.4,"t1":697.08,"ch":"c6","text":"歐洲混合戰：十一月二日到六日，共十六國的航班遭炸彈恐嚇，都沒有發現爆裂物；三日，北約東翼從波羅的海到黑海出現大範圍衛星定位干擾。這些事件目前都沒有官方歸因。"},{"t0":697.53,"t1":705.66,"ch":"c6","text":"經濟戰：中國暫停擴大稀土出口管制的期限，十一月十日到期，截至五日還沒有正式延長的公告。"},{"t0":706.11,"t1":719.87,"ch":"c6","text":"研判：中共對台手法已經從內容操作，延伸到癱瘓網站；選前最後三週，AI 深偽可能升溫。歐洲遭受的低成本、可否認的民生騷擾，目的在製造社會恐慌。"},{"t0":720.97,"t1":723.14,"ch":"c7","text":"最後，下週觀察指標。"},{"t0":723.59,"t1":728.51,"ch":"c7","text":"十一月九日起，Koalicja 演習在波蘭登場，觀察俄方反應。"},{"t0":728.96,"t1":734.55,"ch":"c7","text":"十一月十日，中國稀土出口管制暫停期屆滿，觀察是否正式延長。"},{"t0":735,"t1":742.31,"ch":"c7","text":"十一月十日到十一日，美烏俄在阿布達比會談，觀察能否暫停能源打擊、達成黑海停火。"},{"t0":742.76,"t1":747.62,"ch":"c7","text":"美伊之間的卡達斡旋持續，觀察封鎖與停止攻擊能否交換。"},{"t0":748.07,"t1":755.32,"ch":"c7","text":"十一月二十八日台灣九合一選舉前，持續觀察共機架次、深偽影片與網站癱瘓攻擊。"},{"t0":755.77,"t1":774.09,"ch":"c7","text":"總結本週：烏克蘭能源戰與荷莫茲海峽風險最高，台海與黃岩島的灰色地帶壓力持續，選舉認知作戰與歐洲混合戰正在升溫。以上是國際軍事情勢週報語音導讀，完整來源請見頁面下方的資料來源清單，我們下週見。"}]};
+  const $ = (id) => document.getElementById(id), au = $('aud');
+  if (!N.cues.length) { $('listen').hidden = true; return; }
+  const fmt = (s) => { s = Math.max(0, Math.floor(s)); return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0'); };
+  const chEl = $('aChaps');
+  chEl.innerHTML = N.chapters.map((c) => `<li><button data-c="${c.id}">${c.title}<span class="tm"> ${fmt(c.t)}</span></button></li>`).join('');
+  const tocA = (c) => (c && c.anchor !== 'top' ? document.querySelector(`nav.toc a[href="#${c.anchor}"]`) : null);
+  const chapAt = (t) => { let r = N.chapters[0]; for (const c of N.chapters) if (t >= c.t - 0.05) r = c; return r; };
+  let cue = -2, ch = null;
+  function sync() {
+    const t = au.currentTime, d = au.duration || N.duration;
+    $('aCur').textContent = fmt(t); $('aSeek').value = Math.round((t / d) * 1000);
+    $('dTm').textContent = fmt(t) + ' / ' + fmt(d); $('dProg').style.width = (t / d) * 100 + '%';
+    const i = N.cues.findIndex((c) => t >= c.t0 - 0.05 && t < c.t1 + 0.5);
+    if (i !== cue) { cue = i; if (i >= 0) $('aCap').textContent = N.cues[i].text; }
+    const c = chapAt(t);
+    if (c !== ch) {
+      tocA(ch)?.classList.remove('speaking');
+      ch = c; tocA(c)?.classList.add('speaking');
+      chEl.querySelectorAll('button').forEach((b) => b.classList.toggle('on', b.dataset.c === c.id));
+      if (!au.paused && $('aFollow').checked) {
+        const target = c.anchor === 'top' ? $('listen') : document.getElementById(c.anchor);
+        target?.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth', block: 'start' });
+      }
+    }
+    $('dTxt').innerHTML = `<b>${c.title}</b>` + (cue >= 0 ? N.cues[cue].text : '');
+  }
+  const setBtn = () => {
+    const p = au.paused;
+    $('aPlay').textContent = $('dPlay').textContent = p ? '▶' : '❚❚';
+    $('aPlay').setAttribute('aria-label', p ? '播放語音導讀' : '暫停語音導讀'); $('dPlay').setAttribute('aria-label', p ? '播放語音導讀' : '暫停語音導讀');
+  };
+  const toggle = () => (au.paused ? au.play() : au.pause());
+  $('aPlay').onclick = toggle; $('dPlay').onclick = toggle;
+  au.addEventListener('timeupdate', sync); au.addEventListener('seeked', sync);
+  au.addEventListener('ended', () => { au.currentTime = 0; setBtn(); });
+  $('aSeek').addEventListener('input', (e) => { au.currentTime = (e.target.value / 1000) * (au.duration || N.duration); });
+  chEl.addEventListener('click', (e) => { const b = e.target.closest('button'); if (!b) return; ch = null; au.currentTime = N.chapters.find((c) => c.id === b.dataset.c).t; au.play(); });
+  document.querySelector('.listen .rates').addEventListener('click', (e) => {
+    const b = e.target.closest('button'); if (!b) return;
+    au.playbackRate = +b.dataset.r; b.parentNode.querySelectorAll('button').forEach((x) => x.setAttribute('aria-pressed', String(x === b)));
+  });
+  // compact dock bar while listening with the main player scrolled out of view
+  let inView = true;
+  const showDock = () => { $('dock').hidden = inView || (au.paused && au.currentTime === 0); document.body.style.paddingBottom = $('dock').hidden ? '' : '56px'; };
+  new IntersectionObserver(([e]) => { inView = e.isIntersecting; showDock(); }).observe($('listen'));
+  au.addEventListener('play', () => { setBtn(); showDock(); }); au.addEventListener('pause', () => { setBtn(); showDock(); });
+  window.__narr = { au, N };
 })();
 </script>
